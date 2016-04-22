@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<h3>污染城市列表</h3>
+<ul id="aqi-list" style="text-decoration: none;list-style: none">
+    <!--
+        <li>第一名：福州（样例），10</li>
+        <li>第二名：福州（样例），10</li> -->
+</ul>
+
+<script type="text/javascript">
+
+    var aqiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+
+    (function () {
+        /*
+         在注释下方编写代码
+         遍历读取aqiData中各个城市的数据
+         将空气质量指数大于60的城市显示到aqi-list的列表中
+         */
+
+        //获取污染城市的几种种方法
+        var polution_cities=[];
+        //1.for遍历
+//        for(var i=0;i < aqiData.length;i++){
+//            if(aqiData[i][1]>=60){
+//                polution_cities.push(aqiData[i]);
+//            }
+//        }
+
+        //2.foreach遍历
+//        aqiData.forEach(function(item){
+//            if(item[1]>=60){
+//                polution_cities.push(item)
+//            }
+//        });
+
+        //3.filter函数
+        polution_cities=aqiData.filter(function(item){   //可以和sort连在一起写,因为filter返回值就是我们需要的数组,接着可以对数组做排序处理  注意有浏览器兼容性的问题
+               return item[1]>60;
+        });
+        //4.map方法
+//        polution_cities=aqiData.map(function(item){
+//                item.push("处理过了");
+//            return item;
+//        });
+
+
+
+//        //冒泡排序
+//        for(i=0;i<polution_cities.length;i++){
+//            for(var j=i;j<polution_cities.length;j++){
+//                if(polution_cities[i][1]<polution_cities[j][1]){
+//                    var t=polution_cities[i];
+//                    polution_cities[i]=polution_cities[j];
+//                    polution_cities[j]=t;
+//                }
+//            }
+//        }
+
+        //使用数组自带的排序方法
+        polution_cities.sort(function(obj1,obj2){
+            return obj2[1]-obj1[1];
+        });
+
+
+
+        /*-----------------------------------------------
+        下面是生成html的几种方法
+         */
+        var list_html = "";
+        var hanzi=["一","二","三","四","五","六"];
+
+        //1.for 字符串相加
+        for(i=0;i<polution_cities.length;i++){
+           //两种方式,一种是创造节点,一种是使用innerHTML
+            list_html+="<li> 第"+hanzi[i]+"名 : "+polution_cities[i][0]+", "+polution_cities[i][1]+"</li>";
+        }
+
+        //2.获取最后的html的时候,也可以使用foreach的这种方法  ie9+
+//        polution_cities.forEach(function(item,index){
+//            list_html+="<li> 第"+hanzi[index]+"名 : "+item[0]+", "+item[1]+"</li>";
+//        });
+//        document.getElementById("aqi-list").innerHTML=list_html;
+
+
+        //3.下面是创建节点的方式来动态展示
+//        polution_cities.forEach(function(item,index){
+//            var node=document.createElement("li");
+//            node.innerHTML="第"+hanzi[index]+"名 : "+item[0]+", "+item[1];
+//            document.getElementById("aqi-list").appendChild(node);
+//        });
+
+        //4.使用for-in  这种方案有问题,  1)for-in不保证顺序  2)遍历所有的可枚举对象
+//        for(var item in polution_cities){
+//            list_html+="<li> 第"+parseInt(item)+"名 : "+polution_cities[item][0]+", "+polution_cities[item][1]+"</li>";
+//            document.getElementById("aqi-list").innerHTML=list_html;
+//        }
+        //5.使用for-of  但是没有办法获取到index
+        for(var item of polution_cities){
+            list_html+="<li> 第"+parseInt(item)+"名 : "+item[0]+", "+item[1]+"</li>";
+            document.getElementById("aqi-list").innerHTML=list_html;
+        }
+    })();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+</head>
+<body>
+
+<ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+</ul>
+
+<ul id="resort">
+    <!--
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+</ul>
+
+<button id="sort-btn">排序</button>
+<script type="text/javascript">
+
+//    1.参考以下示例代码，读取页面上已有的source列表，从中提取出城市以及对应的空气质量
+//    2.将数据按照某种顺序排序后，在resort列表中按照顺序显示出来
+    /**
+     * getData方法
+     * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+     * 返回一个数组，格式见函数中示例
+     */
+    function getData() {
+
+        //最最老土的方法
+//        var data=[];
+//        var ulData=document.getElementById("source").childNodes;
+//        var ulCount=ulData.length;//提高效率.否则每次都回去取一次长度,造成低效
+//        for(var i =0;i<ulCount;i++){
+//            if(ulData[i].nodeType==1){  //排除掉ie空白也认为是子节点的bug
+//                //对li标签的子节点进行遍历
+//                var liData=ulData[i].childNodes;
+//                var liCount=liData.length;
+//                for(var j=0;j<liCount;j++){
+//                    if(liData[j].nodeType==1){  //b节点
+//                        var aqi=parseInt(liData[j].innerHTML);
+//                    }else if(liData[j].nodeType==3){//文本节点
+//                        var textValue=liData[j].nodeValue;
+//                    }
+//                }
+//                if(textValue&&aqi){
+//                    data.push([textValue,aqi]);
+//                }
+//
+//            }
+//        }
+
+        //使用map方法来做(抽象来说,适用于对每一项进行处理,然后将处理结果返回的这种情况)   ie9+
+//        var li=document.getElementById("source").getElementsByTagName("li");
+//        var data=[].map.call(li,function(item){
+//            var text= (typeof item.innerText =="string")? item.innerText:item.textContent;//获取到文本节点
+//            var index=text.indexOf("空气质量");
+//            var city=text.slice(0,index);
+//            var aqi=item.getElementsByTagName("b")[0].innerHTML;//获取到具体数值
+//            return [city,aqi];
+//        });
+//        console.log(data);
+//        return data;
+
+        //使用切割的方式试试  或者直接按照行来组成数组,然后取出这个数组的数值作为值,最后用这个值来排序,直接组成最后的html,代码将更简单
+        var html=document.getElementById("source").innerHTML;
+        return html.split("\n").filter(function(item){
+            return !!item;
+        }).map(function(item){
+            return [item.split("<li>")[1].split('<b>')[0],item.match(/(\d)+/g)[0]]
+        });
+
+
+    }
+
+    /**
+     * sortAqiData
+     * 按空气质量对data进行从小到大的排序
+     * 返回一个排序后的数组
+     */
+    function sortAqiData(data) {
+        data.sort(function(obj1,obj2){
+            return obj2[1]-obj1[1];
+        });
+        return data;
+    }
+    /**
+     * render
+     * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+     * 格式见ul中的注释的部分
+     */
+    function render(data) {
+
+        var list_html = "";
+        var hanzi=["一","二","三","四","五","六","七"];
+        for(var i=0;i<data.length;i++){
+            list_html+="<li> 第"+hanzi[i]+"名 : "+data[i][0]+", "+data[i][1]+"</li>";
+        }
+        document.getElementById("resort").innerHTML=list_html;
+
+    }
+
+    function btnHandle() {
+
+        var aqiData = getData();
+        aqiData = sortAqiData(aqiData);
+        render(aqiData);
+
+    }
+
+
+    function init() {
+
+        // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
+        document.getElementById("sort-btn").onclick=btnHandle;  //不要加()
+
+    }
+
+    init();
+
+</script>
+</body>
+</html>
+
