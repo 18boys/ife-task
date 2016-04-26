@@ -40,7 +40,7 @@ window.onload = function () {
 // 记录当前页面的表单选项
     var pageState = {
         nowSelectCity: -1,
-        nowGraTime: "month"
+        nowGraTime: "week"
     };
 
 
@@ -49,17 +49,13 @@ window.onload = function () {
      * 渲染图表
      */
     function renderChart() {
-        if (chartData==''){
-            return;
-        }
+        if (chartData==''){return;}
         var html='';
         var width=Math.floor(Math.round(document.body.clientWidth*0.8/chartData.length));
-
         chartData.forEach(function(item,index){
             var title="时间:"+item[0]+",aqi:"+item[1];
             html+="<span title='"+title+"' style='width:"+width+"px;"+"height:"+item[1]+"px;"+"left:"+width*index+"px;background:"+color[Math.round(Math.random()*4)]+"'></span>"
         });
-        console.log(html);
         document.getElementById("aqi-chart-wrap").innerHTML=html;
     }
 
@@ -90,13 +86,13 @@ window.onload = function () {
             return;
         }
         // 确定是否选项发生了变化
-        var currentValue= eventTaget.value;
+        var currentValue=eventTaget.value;
         if (currentValue==pageState.nowGraTime){
             return;
         }
-        // 设置对应数据
         pageState.nowGraTime=currentValue;
         // 调用图表渲染函数
+        initAqiChartData();
         renderChart();
     }
 
@@ -113,6 +109,7 @@ window.onload = function () {
         // 设置对应数据
         pageState.nowSelectCity=currentValue;
         // 调用图表渲染函数
+        initAqiChartData();
         renderChart();
     }
 
@@ -122,7 +119,7 @@ window.onload = function () {
      * 初始化日、周、月的radio事件，当点击时，调用函数graTimeChange
      */
     function initGraTimeForm() {
-        var formGra = document.getElementsByName("form-gra-time");
+        var formGra = document.getElementById("form-gra-time");
         EventUtil.addEvent(formGra,"click",graTimeChange);
     }
 
@@ -145,17 +142,50 @@ window.onload = function () {
     }
 
     /**
+     * 给定一个日期,给出此日期对应的周的开始日以及结束日
+     * 日期格式2016-01-23
+     */
+    function getWeekDate(dat){
+        dat=new Date(dat);
+        //得到距离开始日相差的天数
+        var day=dat.getDay();
+        dat.setDate(dat.getDate()-day);
+        var startDay=getDateStr(dat);
+        dat.setDate(dat.getDate()+7);
+        var endDate=getDateStr(dat);
+        return startDay+"--->"+endDate;
+    }
+    /**
      * 初始化图表需要的数据格式
      */
     function initAqiChartData() {
         // 将原始的源数据处理成图表需要的数据格式
+        chartData=[];
+        console.log(pageState);
         var data=aqiSourceData[pageState.nowSelectCity];
         switch (pageState.nowGraTime){
             case "day":
                 chartData=data;
                 break;
             case "week":
-                //按
+                //按周来做整合
+                var week={};
+                data.forEach(function(item){
+                    if(week[getWeekDate(item[0])]){
+                        week[getWeekDate(item[0])].push(item[1]);
+                    }else{
+                        week[getWeekDate(item[0])]=[item[1]];
+                    }
+
+                });
+                for(var prop in week){
+                    if(week.hasOwnProperty(prop)){
+                        var avge=week[prop].reduce(function(prev,now){
+                                return  prev+now;
+                            })/week[prop].length;
+                        chartData.push([prop,Math.round(avge)]);
+                    }
+                }
                 break;
             case "month":
                 //按照月来做聚合
@@ -168,15 +198,12 @@ window.onload = function () {
                   }
 
             });
-                console.log(month);
                 for(var key in month){
                     var avg=month[key].reduce(function(prev,now){
                             return  prev+now;
                         })/month[key].length;
-                    console.log(avg);
                     chartData.push([key,Math.round(avg)]);
                 }
-                console.log(chartData);
                 break;
         }
 

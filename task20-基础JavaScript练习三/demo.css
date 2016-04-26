@@ -1,0 +1,22 @@
+#queue div{
+    margin: auto 10px;
+    background-color: red ;
+    color:white;
+    float: left;
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+}
+
+#queue div span{
+
+    background-color: yellow ;
+    color:black;
+
+}
+
+
+button{
+    margin: 10px 7px;
+    height: 10px ;
+}

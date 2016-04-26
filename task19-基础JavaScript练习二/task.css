@@ -1,0 +1,28 @@
+/*#queue div{*/
+    /*margin: 20px 10px;*/
+    /*background-color: red ;*/
+    /*color:white;*/
+    /*float: left;*/
+    /*height:20px;*/
+    /*line-height:20px;*/
+    /*font-size:12px;*/
+/*}*/
+
+#queue div{
+    position: absolute;
+    bottom: 0;
+    background: red;
+    border:white 1px solid;
+
+}
+
+span{
+    color:red;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+button{
+    margin: 5px 7px;
+    height: 10px ;
+}

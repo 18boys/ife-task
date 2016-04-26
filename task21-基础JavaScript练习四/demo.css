@@ -1,0 +1,36 @@
+button{
+    margin: 10px 7px;
+    height: 10px ;
+}
+
+#tagsShow{
+    width: 100%;
+    height: 30px;
+    margin: 10px auto;
+}
+
+#tagsShow div{
+    margin: auto 10px;
+    background-color: #49b8ff;
+    color:white;
+    float: left;
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+    padding: 5px;
+}
+
+#tagsShow div:hover{
+    background-color: red;
+}
+
+#hobbyShow div{
+    margin: auto 10px;
+    background-color: #49b8ff;
+    color:white;
+    float: left;
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+    padding: 5px;
+}

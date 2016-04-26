@@ -1,0 +1,33 @@
+#parent{
+    /*position: relative;*/
+    width: 500px;
+    height: 500px;
+    border: dashed 1px blue;
+}
+
+#parent div{
+    /*position: absolute;*/
+    float: left;
+    width: 47%;
+    height:47%;
+    background: green;
+    margin: 1%;
+}
+
+/*#div1{*/
+    /*left: 0;*/
+    /*top:0;*/
+/*}*/
+
+/*#div2{*/
+    /*left: 0;*/
+    /*top:51%;*/
+/*}*/
+/*#div3{*/
+    /*left: 51%;*/
+    /*top:0;*/
+/*}*/
+/*#div4{*/
+    /*left: 51%;*/
+    /*top:51%;*/
+/*}*/
