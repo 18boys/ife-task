@@ -275,12 +275,34 @@ window.onload = function () {
         var deleteButton=document.getElementById("deleteButton");
         EventUtil.addEvent(deleteButton,"click",deleteNode);
     }
+
+    /**
+     * 在选中的节点下面增加节点
+     */
+    function addNode(){
+        var addNodeParents=document.getElementsByClassName(CLICKED_CLASS);
+        Array.prototype.forEach.call(addNodeParents,function(item){
+            var newNode=document.createElement("div");
+            newNode.innerHTML=document.getElementById("node-text").value.trim();
+            item.appendChild(newNode);  //可以试试多种插入的方法
+        })
+    }
+
+    /**
+     * 增加节点初始化
+     */
+    function initAddButton(){
+         var addButton=document.getElementById("addButton");
+        EventUtil.addEvent(addButton,"click",addNode);
+    }
+
     /**
      * 初始化
      */
     function init() {
         initNodeClick();
         initDeleteButton();
+        initAddButton();
         initTraverseButton();
         initSearchButton();
     }
