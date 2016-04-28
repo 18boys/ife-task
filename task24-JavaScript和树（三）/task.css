@@ -30,5 +30,12 @@
     float: left;
 }
 
+input {
+    margin: 8px auto;
+}
 
+.clicked{
+    background-color: #e627ff;
+
+}
 
