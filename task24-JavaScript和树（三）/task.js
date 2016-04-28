@@ -52,7 +52,21 @@ window.onload = function () {
         removeClass: function (obj, className) {
             var match=new RegExp("(\\s|^)"+className+"(\\s|$)");
             if (obj.className&&obj.className.search(match)>-1) {
-                obj.className.replace(match,'');
+                obj.className=obj.className.replace(match,'');
+            }
+        },
+        hasClass:function(obj,className){
+            var match=new RegExp("(\\s|^)"+className+"(\\s|$)");
+            return obj.className&&obj.className.search(match)>-1? true:false;
+        },
+        toggleClass:function(obj,className){
+            var match=new RegExp("(\\s|^)"+className+"(\\s|$)");
+            if (obj.className.search(match)==-1) {
+                obj.className += obj.className + " " + className;
+                console.log("mei")
+            }else {
+                obj.className=obj.className.replace(match,'');
+                console.log("you")
             }
         }
     };
@@ -231,25 +245,42 @@ window.onload = function () {
     /**
      * 处理被选中的节点
      */
-    function processclickedDiv(e) {
+    function processClickedDiv(e) {
         e = EventUtil.getEvent(e);
         var target = EventUtil.getTarget(e);
-        ClassNameUtil.addClass(target,"clicked");
+        ClassNameUtil.toggleClass(target,CLICKED_CLASS);
     }
 
     /**
      * 初始化元素被点击之后选中的处理事件
      */
-    function initBodyClick() {
+    function initNodeClick() {
         var divContainer = document.getElementById("level1_0");
-        EventUtil.addEvent(divContainer, "click", processclickedDiv);
+        EventUtil.addEvent(divContainer, "click", processClickedDiv);
     }
 
+    /**
+     * 删除选中的节点
+     */
+    function deleteNode(){
+        var deleteNodes=document.getElementsByClassName(CLICKED_CLASS);
+        Array.prototype.forEach.call(deleteNodes,function(item){  //现在有点问题是 删除不同层次的节点的时候,总会有删除不干净的情况存在??
+            item.outerHTML='';
+        })
+    }
+    /**
+     * 删除button初始化
+     */
+    function initDeleteButton(){
+        var deleteButton=document.getElementById("deleteButton");
+        EventUtil.addEvent(deleteButton,"click",deleteNode);
+    }
     /**
      * 初始化
      */
     function init() {
-        initBodyClick();
+        initNodeClick();
+        initDeleteButton();
         initTraverseButton();
         initSearchButton();
     }
