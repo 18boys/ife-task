@@ -100,23 +100,24 @@
      * 获取哪个城市数据被删，删除数据，更新表格显示
      */
     function delBtnHandle(e) {
+
         //确定点击的是按钮,点击的地方不是按钮不处理
         e.target = e.target || e.srcElement;
         if (e.target.tagName.toLowerCase() == "button") {
-            document.getElementById("aqi-table").getElementsByTagName("tbody")[0]
-                .removeChild(e.target.parentNode.parentNode);
+            //删除的一个方法是删除子节点
+            //document.getElementById("aqi-table").getElementsByTagName("tbody")[0]
+            //    .removeChild(e.target.parentNode.parentNode);
+            //2.使用delRow()来删除某一行
+            var rowIndex= e.target.parentNode.parentNode.rowIndex;
+            document.getElementById("aqi-table").deleteRow(rowIndex);
+
         }
+
     }
 
     function init() {
-
-        // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
-        //  document.getElementById("add-btn").onclick=addBtnHandle;
         document.getElementById("add-btn").addEventListener("click", addBtnHandle);
-        // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
         document.getElementById("aqi-table").onclick = delBtnHandle;
-
-        //可以在提示的那块做一些优化什么的
     }
 
     init();
