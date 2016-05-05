@@ -1,15 +1,50 @@
 <!DOCTYPE HTML>
 <meta charset="utf-8">
 <html>
-<head></head>
+<head>
+    <link rel="stylesheet" href="../task25-JavaScript和树（四）/demo.css">
+</head>
 <body>
 
-<table  width="450" border="1" cellspacing="0" cellpadding="2" bordercolor="#009900">
+<table width="450" border="1" cellspacing="0" cellpadding="2" bordercolor="#009900">
     <tr>
         <td>第一行第一栏</td>
         <td colspan="2">第一行的第二、三栏</td>
     </tr>
 
 </table>
+
+<form id="substringform">
+    <textarea id="substring1"></textarea>
+    <textarea id="substring2"></textarea>
+    <input id="substring4" value="转换" type="button"></input>
+    <input id="substring3" value="转换" type="button" onclick="substringfunction()"></input>
+</form>
+
+
+<div class="left-triangle"></div>
+<script type="text/javascript">
+
+    var str = substringform.substring1.value;
+    console.log("ster",str);
+    console.log(typeof substringform.substring1);
+    console.log(typeof str);
+    substringform.substring4.onclick = function () {
+        alert(str);
+    };
+    //无法获取str值
+
+
+//    function substringfunction() {
+//        var str =substringform.substring1.value;
+//        console.log(typeof str);
+//        console.log(str);
+//        if (str == "") {
+//            alert("请输入！");
+//        } else {
+//            substringform.substring2.value = str.substring(4, 9);
+//        }
+//    }//这样可以获得值
+</script>
 </body>
 </html>

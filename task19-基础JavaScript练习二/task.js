@@ -107,15 +107,18 @@ window.onload = function () {
         if (target.tagName.toLowerCase() != "div") {
             return;
         }
-        //找到点击元素对应的index
+        //找到点击元素对应的index   //可以试试call的方法使用array获取第几个参数的方式来获取其位置
         var childNodes = document.getElementById("queue").getElementsByTagName("div");
-        for (var i = 0; i < childNodes.length; i++) {
-            if (childNodes[i] === target) {
-                queue.splice(i, 1);
-                renderQueue();
-                return;
-            }
-        }
+        //for (var i = 0; i < childNodes.length; i++) {
+        //    if (childNodes[i] === target) {
+        //        queue.splice(i, 1);
+        //        renderQueue();
+        //        return;
+        //    }
+        //}
+        var  index=Array.prototype.indexOf.call(childNodes,target);
+        queue.splice(index,1);
+        renderQueue();
 
     }
 

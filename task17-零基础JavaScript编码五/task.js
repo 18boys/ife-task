@@ -54,7 +54,8 @@ window.onload = function () {
         var width=Math.floor(Math.round(document.body.clientWidth*0.8/chartData.length));
         chartData.forEach(function(item,index){
             var title="时间:"+item[0]+",aqi:"+item[1];
-            html+="<span title='"+title+"' style='width:"+width+"px;"+"height:"+item[1]+"px;"+"left:"+width*index+"px;background:"+color[Math.round(Math.random()*4)]+"'></span>"
+            //html+="<span title='"+title+"' style='width:"+width+"px;"+"height:"+item[1]+"px;"+"left:"+width*index+"px;background:"+color[Math.round(Math.random()*4)]+"'></span>"
+            html+="<span title='"+title+"' style='width:"+width+"px;"+"height:"+item[1]+"px;"+"left:"+width*index+"px;background:#"+Math.random().toString(16).substring(2, 8)+"'></span>"
         });
         document.getElementById("aqi-chart-wrap").innerHTML=html;
     }
