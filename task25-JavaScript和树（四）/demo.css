@@ -1,24 +1,20 @@
-li {
-    list-style: none;
-    margin: 5px 0;
-}
-
-ul {
-    margin: 0;
-    padding: 0;
+#tree{
+    margin: 10px 0;
+    font-size: 15px;
+    color: black;
+    background: #fbffe7;
+    width: 120px;
+    overflow: auto;
 }
 
 #tree div {
-    margin: 10px 0;
-    font-size: 15px;
-    color: aqua;
-    background: #fbffe7;
-    width: 90px;
+    margin: 5px 0;
+    position: relative;
+    left: 15px;
 }
 
-ul li {
-    color: #77ff83;
-    font-size: 13px;
+span{
+    float:left;
 }
 
 .hide {
@@ -29,21 +25,38 @@ ul li {
     display: block;
 }
 
+.selected{
+    background-color: #49b8ff;
+}
+
+div:focus{
+   background-color: #49b8ff;
+}
+
+.focus{
+    background-color: #49b8ff;
+}
 .left-triangle{
     width: 0;
     height: 0;
     border-left: 8px solid #006633;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
+    line-height: 5px;
 }
 
 .bottom-triangle{
     width: 0;
     height: 0;
-    border-bottom: 8px solid #006633;
+    border-bottom: 10px solid #006633;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 8px solid transparent;
+    border-top:3px solid transparent;
+    line-height: 5px;
 }
 
+
+#node-text{
+    margin-bottom: 8px;
+}
 

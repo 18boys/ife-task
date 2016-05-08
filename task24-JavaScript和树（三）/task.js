@@ -90,13 +90,6 @@ window.onload = function () {
 
 
     /**
-     * 给定一个节点,给出他的文本节点
-     */
-    function getTextNode() {
-
-    }
-
-    /**
      * 遍历二叉树的递归函数
      */
     function traverseTree() {

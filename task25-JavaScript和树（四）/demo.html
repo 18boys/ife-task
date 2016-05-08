@@ -7,24 +7,41 @@
     <script src="demo.js"></script>
 </head>
 <body>
-<div id="tree">
-    <div class="main-tree">
-        <div class="left-triangle">Animals</div>
-        <ul class="sub-tree">
-            <li>dog</li>
-            <li>cat</li>
-            <li>duck</li>
-        </ul>
-    </div>
 
-    <div class="main-tree">
-        <div class="left-triangle">Cars</div>
-        <ul class="sub-tree">
-            <li>vm</li>
-            <li>changan</li>
-            <li>changcheng</li>
-        </ul>
+<div>
+    <label for="node-text">在这里输入要新加的节点或者查找的节点名字</label>
+    <input type="text" id="node-text">
+    <br/>
+    <button id="addButton">增加节点</button>
+    <button id="deleteButton">删除节点</button>
+    <button id="start-search">查找节点</button>
+</div>
+<div id="tree">
+    <div><span class="left-triangle"></span>高级动物
+        <div><span class="left-triangle"></span>猿科
+            <div><span class="left-triangle"></span>鱼类</div>
+            <div><span class="left-triangle"></span>黑猩猩</div>
+            <div><span class="left-triangle"></span>猴子</div>
+        </div>
+        <div><span class="left-triangle"></span>鱼类
+            <div><span class="left-triangle"></span>老虎</div>
+        </div>
     </div>
+    <div><span class="left-triangle"></span>爬行类
+        <div><span class="left-triangle"></span>鱼类</div>
+    </div>
+    <div><span class="left-triangle"></span>水生生物
+        <div><span class="left-triangle"></span>鱼类
+        </div>
+        <div><span class="left-triangle"></span>鲸类
+            <div><span class="left-triangle"></span>蓝鲸
+                <div><span class="left-triangle"></span>小的鲸鱼</div>
+                <div><span class="left-triangle"></span>大的鲸鱼</div>
+
+            </div>
+        </div>
+    </div>
+    <div><span class="left-triangle"></span>植物</div>
 </div>
 </body>
 </html>
