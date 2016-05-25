@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UI浮出层</title>
+    <script src="jquery.js"></script>
+    <script src="mask.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="mask.css">
+</head>
+<body>
+<div id="contain">
+    <button id="button">点击一下弹出浮层</button>
+</div>
+
+<div id="login"  class="hide">
+    <div id="login-head">登录</div>
+    <div id="login-body">
+        <input type="text" value="请输入用户名/邮箱">
+        <input type="text" value="请输入密码">
+        <button>登录</button>
+        <button>取消</button>
+    </div>
+</div>
+<div id="mask"  class="hide"></div>
+
+<script>
+    var commitPop=new Pop({
+        popId:"login",   //弹出框的id
+        maskId:"mask",
+        confirm:showMessage,  //确认回调函数
+        cancel:showAlert //取消回调函数
+    });
+
+    $("button").on("click",function(){
+        commitPop.init().toggle();
+    });
+
+    function showMessage(){
+        alert("haha");
+    }
+
+    function showAlert(){
+        alert("hehe");
+    }
+</script>
+</body>
+</html>

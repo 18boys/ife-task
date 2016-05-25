@@ -1,12 +1,14 @@
 (function (window, undefined) {
     function Popup(para) {
-        return new Popup.prototype.init(para);
+        //return new Popup.prototype.init(para);
+        this.config=para;
     }
     Popup.prototype = {
         /**
          * 创建弹出层
          */
-        createPopup: function (para) {
+        createPopup: function () {
+            var para=this.config;
             var body = document.getElementsByTagName("body")[0];
             var section = document.createElement("section");
             section.className = "pop-wrap";
@@ -40,6 +42,7 @@
             section.appendChild(footer);
             var cover = document.createElement("section");
             cover.className = "pop-up";
+            console.log("cover:",cover);
             cover.appendChild(section);
             body.appendChild(cover);
             /**
@@ -77,7 +80,8 @@
          * @param para
          * @returns {Popup}
          */
-        init: function (para) {
+        init: function () {
+            var para=this.config;
             this.createPopup(para);
             this.cover = document.querySelector(".pop-up");
             this.wrap = this.cover.querySelector(".pop-wrap");
@@ -280,6 +284,7 @@
          * @returns {Popup}
          */
         toggle: function () {
+            console.log(this);
             if (this.status) {
                 this.hide();
             } else {
@@ -288,6 +293,6 @@
             return this;
         }
     };
-    Popup.prototype.init.prototype = Popup.prototype;//让init的实例能够通过原型链访问Popup.prototype
+    //Popup.prototype.init.prototype = Popup.prototype;//让init的实例能够通过原型链访问Popup.prototype
     window.Popup = Popup;//导出接口
 })(window, undefined);

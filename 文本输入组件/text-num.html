@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本组件</title>
+    <script src="jquery.js"></script>
+    <!--最简单的写法-->
+    <!--<script src="text-num-simple.js"></script>-->
+    <!--函数对象的写法-->
+    <script src="text-num-var.js"></script>
+<body>
+<input type="text" id="text-input" >
+
+<script>
+    var textNum=new textCount({
+        id:"text-input"
+    });
+    textNum.init().render();
+</script>
+</body>
+</html>
