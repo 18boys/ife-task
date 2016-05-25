@@ -25,8 +25,25 @@
                 target['on' + type] = handler;
             }
         },
+        removeEvent:function(target, type,handler){
+            if (target.removeEventListener) {
+                target.removeEventListener(type,handler);
+            } else if (target.detachEvent) {
+                target.detachEvent('on' + type, handler);
+            } else {
+                target['on' + type] = null;
+            }
+        },
         getTarget: function (e) {
             return e.target || e.srcElement;
+        },
+        stopDefault:function(e){
+            if(e.preventDefault){
+                e.preventDefault();
+                console.log("cx");
+            }else{
+                e.returnValue=false;
+            }
         }
     };
 
@@ -79,26 +96,36 @@
         }
     };
 
+    function stopDefault(e){
+        e=EventUtil.getEvent(e);
+        EventUtil.stopDefault(e);
+        console.log(e.wheelDelta);
+    }
+
     /**
      * 遮罩的展示
      * @type {Element}
      */
-    function showMask(){
+    function toggleMask(){
         ClassUtil.toggleClasses(mask,"hide","mask");
         ClassUtil.toggleClasses(test,"hide","popup");
 
+
     }
 
-    function closePop(e){
-        e=EventUtil.getEvent(e);
-        var target=EventUtil.getTarget(e);
-        //如果界面有popup的类,那么僵此类对象的对象隐藏掉,并且将遮罩去除
-        //if(ClassUtil.hasClass("popup"))
+    function setWheel(e){
+        console.log("43");
+        if(ClassUtil.hasClass(mask,"mask")){
+            //禁用滚轮
+            console.log("fs");
+            stopDefault(e);
+        }
     }
 
     function init(){
-        EventUtil.addEvent(button,"click",showMask);
-        EventUtil.addEvent(document.body,"click",closePop);
+        EventUtil.addEvent(button,"click",toggleMask);
+        EventUtil.addEvent(mask,"click",toggleMask);
+        EventUtil.addEvent(document,"mousewheel",setWheel(event));
     }
 
     init();
