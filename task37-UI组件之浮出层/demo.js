@@ -6,8 +6,8 @@
 (function(){
 
      var button=document.getElementById("button");
-     var mask=document.getElementById("mask");
-     var test=document.getElementById("test");
+     var mask=document.getElementById("Alert-mask");
+     var test=document.getElementById("Alert-pop");
 
     /**
      * 事件帮助类
@@ -107,17 +107,13 @@
      * @type {Element}
      */
     function toggleMask(){
-        ClassUtil.toggleClasses(mask,"hide","mask");
-        ClassUtil.toggleClasses(test,"hide","popup");
-
-
+        ClassUtil.toggleClasses(mask,"Alert-hide","Alert-mask");
+        ClassUtil.toggleClasses(test,"Alert-hide","Alert-popup");
     }
 
     function setWheel(e){
-        console.log("43");
-        if(ClassUtil.hasClass(mask,"mask")){
+        if(ClassUtil.hasClass(mask,"Alert-mask")){
             //禁用滚轮
-            console.log("fs");
             stopDefault(e);
         }
     }

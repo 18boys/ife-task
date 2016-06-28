@@ -2,70 +2,25 @@
 <meta charset="utf-8">
 <html>
 <head>
-<link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="demo.css">
 
 </head>
 <body>
-<div id="contain">
-    <button id="button">点击一下弹出浮层</button>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-</div>
 
-<div id="test"  class="hide">
 
+<div id="Alert-pop" class="Alert-hide">
+    <div id="Alert-header">
+        <span id="Alert-notice">提示</span><span id="Alert-cancel">x</span>
+    </div>
+    <div id="Alert-content">确认要删除此问卷?</div>
+    <div id="Alert-footer">
+        <div id="Alert-button">
+            <button>确定</button>
+            <button>取消</button>
+        </div>
+    </div>
 </div>
-<div id="mask"  class="hide"></div>
+<div id="Alert-mask" class="Alert-hide"></div>
 
 <script src="demo.js"></script>
 </body>

@@ -5,7 +5,7 @@
     }
     Popup.prototype = {
         /**
-         * 创建弹出层
+         * 创建弹出层   应该放到外面,不用暴露给外边
          */
         createPopup: function () {
             var para=this.config;
@@ -236,7 +236,7 @@
          * 阻止页面滚动回调事件
          * @param event
          */
-        stopScroll: function (event) {
+        stopSgitcroll: function (event) {
             util.preventDefault(event);
         },
         /**
@@ -296,3 +296,5 @@
     //Popup.prototype.init.prototype = Popup.prototype;//让init的实例能够通过原型链访问Popup.prototype
     window.Popup = Popup;//导出接口
 })(window, undefined);
+
+

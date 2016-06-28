@@ -43,7 +43,7 @@ window.onload = function() {
                 }, false);
 
                 //遮罩层隐藏
-                document.querySelector("#overlay-mask").addEventListener('click', function() {
+                document.querySelector("#overlay-Alert").addEventListener('click', function() {
                     document.getElementById("modal").className = 'modal hide';
 
                 }, false);

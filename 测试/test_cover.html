@@ -1,18 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<meta charset="utf-8">
 <head>
-    <meta charset="UTF-8">
-    <title>测试遮罩</title>
+    <style>
+        .div1 {
+            height: 100px;
+            border: 1px solid blue;
+            position:absolute;
+            top:0;
+            bottom: 0;
+            margin: auto;
+            width: 100px;
+        }
+
+        .div2 {
+            width: 300px;
+            height: 100px;
+            margin: auto;
+            border: 1px solid red;
+            box-sizing:border-box;
+        }
+
+        /*.container{*/
+            /*position: relative;*/
+            /*top:50%;*/
+            /*float: left;*/
+        /*}*/
+    </style>
 </head>
 <body>
 
-<button onclick="showMessage()"></button>
-</body>
+<!--<div class="container">-->
+    <!--<div class="div1">这个是个较小的框 (width 为 300px ，height 为 100px)。</div>-->
+<!--</div>-->
+<!--<br>-->
 
-<script>
-    function showMessage(){
-        var div=document.body.appendChild(document.createElement("div"));
-        alert("cc");
-    }
-</script>
+<div class="div2">这个是个较大的框 (width 为 300px ，height 为 100px)。</div>
+    <!--<div>-->
+        <!--<table>-->
+            <!--<tbody>-->
+            <!--<tr><td>-->
+                <!--<ul>-->
+                    <!--<li><a href="#">1</a></li>-->
+                    <!--<li><a href="#">2</a></li>-->
+                    <!--<li><a href="#">3</a></li>-->
+                <!--</ul>-->
+            <!--</td></tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+
+    <!--<style>-->
+        <!--table{-->
+            <!--margin:0 auto;-->
+        <!--}-->
+        <!--ul{list-style:none;margin:0;padding:0;}-->
+        <!--li{float:left;display:inline;margin-right:8px;}-->
+    <!--</style>-->
+</body>
 </html>

@@ -122,56 +122,56 @@ window.onload = function () {
          } */
 
         //使用数组缓存的方案
-        //深度中序
+        //前序序
         //1.首先将上一次处理的目标的颜色变回来
-        if (lastNode.length > 0) {
-            var last = lastNode.pop();
-            last[0].style.borderColor = last[1];
-
-        }
-        if (currentTree.length > 0) {
-
-            //2.取出第一个作为这一次遍历的目标
-            var currentNode = currentTree.pop();
-            lastNode.push([currentNode, currentNode.style.borderColor]);
-            currentNode.style.borderColor = TARGET_COLOR;
-
-            if (isSearch) {
-                var searchInput = document.getElementById("search-input").value.trim();
-                if (searchInput == currentNode.childNodes[0].nodeValue.trim()) {
-                    searchedText.push(currentNode.childNodes[0]);
-                }
-
-                //将需要特殊显示的节点显示
-                searchedText.forEach(function (item) {
-                    item.parentNode.style.borderColor = SEARCH_COLOR;
-                })
-            }
-
-            //3.将其子节点放入缓存队列中
-            var childNodes = getChildrenByTagName(currentNode, "div");
-            if (childNodes.length > 0) {
-                //currentTree.concat(childNodes);  //为何还不行啊!!!  扯淡啊....
-                Array.prototype.forEach.call(childNodes, function (item) {
-                    currentTree.push(item);
-                });
-            }
-            setTimeout(arguments.callee, 500);
-            console.log("search:", searchedText);
-        } else {
-            //遍历完毕
-            if (isSearch) {
-                if (searchedText.length == 0) {
-                    document.getElementById("tips").innerHTML = '*找不到此文本';
-                } else {
-                    //将需要特殊显示的节点显示
-                    searchedText.forEach(function (item) {
-                        item.parentNode.style.borderColor = SEARCH_COLOR;
-                    })
-                }
-
-            }
-        }
+        //if (lastNode.length > 0) {
+        //    var last = lastNode.pop();
+        //    last[0].style.borderColor = last[1];
+        //
+        //}
+        //if (currentTree.length > 0) {
+        //
+        //    //2.取出第一个作为这一次遍历的目标
+        //    var currentNode = currentTree.pop();
+        //    lastNode.push([currentNode, currentNode.style.borderColor]);
+        //    currentNode.style.borderColor = TARGET_COLOR;
+        //
+        //    if (isSearch) {
+        //        var searchInput = document.getElementById("search-input").value.trim();
+        //        if (searchInput == currentNode.childNodes[0].nodeValue.trim()) {
+        //            searchedText.push(currentNode.childNodes[0]);
+        //        }
+        //
+        //        //将需要特殊显示的节点显示
+        //        searchedText.forEach(function (item) {
+        //            item.parentNode.style.borderColor = SEARCH_COLOR;
+        //        })
+        //    }
+        //
+        //    //3.将其子节点放入缓存队列中
+        //    var childNodes = getChildrenByTagName(currentNode, "div");
+        //    if (childNodes.length > 0) {
+        //        //currentTree.concat(childNodes);  //为何还不行啊!!!  扯淡啊....
+        //        Array.prototype.forEach.call(childNodes, function (item) {
+        //            currentTree.push(item);
+        //        });
+        //    }
+        //    setTimeout(arguments.callee, 500);
+        //    console.log("search:", searchedText);
+        //} else {
+        //    //遍历完毕
+        //    if (isSearch) {
+        //        if (searchedText.length == 0) {
+        //            document.getElementById("tips").innerHTML = '*找不到此文本';
+        //        } else {
+        //            //将需要特殊显示的节点显示
+        //            searchedText.forEach(function (item) {
+        //                item.parentNode.style.borderColor = SEARCH_COLOR;
+        //            })
+        //        }
+        //
+        //    }
+        //}
 
 
         //简单粗暴的方法,直接获取到所有的div节点
@@ -189,7 +189,27 @@ window.onload = function () {
         //    setTimeout(arguments.callee,500);
         //}
 
+
+        ////前序遍历
+        if(currentTree.length==0){
+            return;
+        }
+        var  currentNode=currentTree.pop();
+
+        if(currentNode.childNodes.length>0){
+            var childNode=Array.prototype.slice.call(currentNode.childNodes);
+            var last_index=childNode.length-1;
+            childNode.forEach(function(item,index){
+                if(index==last_index){
+                    currentNode.style.borderColor="red";
+                }
+                currentTree.push(item);
+                setTimeout(traverseTree,1000);
+            })
+        }
     }
+
+
 
 
     /**
@@ -210,12 +230,25 @@ window.onload = function () {
         }
         var root = document.getElementById("level1_0");
         currentTree.push(root);
+        traverseTree();
         //currentTree.push(obj);
         //Array.prototype.forEach.call(obj,function(item){   //使用concat都不能把他装进去,哎,什么情况?
         //    currentTree.push(item);
         //    console.log(item);
         //});
-        setTimeout(traverseTree, 0);
+        //setTimeout(function tranverse(element){
+        //    return function (){
+        //        //前序遍历
+        //        element.style.borderColor="red";
+        //        if(element.childNodes.length>0){
+        //            var childNode=Array.prototype.slice.call(element.childNodes);
+        //            childNode.forEach(function(item){
+        //                setTimeout(tranverse(item));
+        //            })
+        //        }
+        //    };
+        //}(root), 0)
+
     }
 
     /**

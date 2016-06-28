@@ -6,45 +6,36 @@
 </head>
 <body>
 
-<table width="450" border="1" cellspacing="0" cellpadding="2" bordercolor="#009900">
-    <tr>
-        <td>第一行第一栏</td>
-        <td colspan="2">第一行的第二、三栏</td>
-    </tr>
+<p id="help">Helpful notes will appear here</p>
+<p>E-mail: <input type="text" id="email" name="email"></p>
+<p>Name: <input type="text" id="name" name="name"></p>
+<p>Age: <input type="text" id="age" name="age"></p>
 
-</table>
+<script>
+    function showHelp(help) {
+        document.getElementById('help').innerHTML = help;
+    }
 
-<form id="substringform">
-    <textarea id="substring1"></textarea>
-    <textarea id="substring2"></textarea>
-    <input id="substring4" value="转换" type="button"></input>
-    <input id="substring3" value="转换" type="button" onclick="substringfunction()"></input>
-</form>
+    function  makeShowHelp(help){
+        return function (){
+            showHelp(help);
+        }
+    }
 
+    function setupHelp() {
+        var helpText = [
+            {'id': 'email', 'help': 'Your e-mail address'},
+            {'id': 'name', 'help': 'Your full name'},
+            {'id': 'age', 'help': 'Your age (you must be over 16)'}
+        ];
 
-<div class="left-triangle"></div>
-<script type="text/javascript">
+        for (var i = 0; i < helpText.length; i++) {
+            var item = helpText[i];
+            document.getElementById(item.id).onfocus = makeShowHelp(item.help);
+        }
+    }
 
-    var str = substringform.substring1.value;
-    console.log("ster",str);
-    console.log(typeof substringform.substring1);
-    console.log(typeof str);
-    substringform.substring4.onclick = function () {
-        alert(str);
-    };
-    //无法获取str值
-
-
-//    function substringfunction() {
-//        var str =substringform.substring1.value;
-//        console.log(typeof str);
-//        console.log(str);
-//        if (str == "") {
-//            alert("请输入！");
-//        } else {
-//            substringform.substring2.value = str.substring(4, 9);
-//        }
-//    }//这样可以获得值
+    setupHelp();
 </script>
 </body>
 </html>
